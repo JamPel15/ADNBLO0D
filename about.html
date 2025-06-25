@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | ADN Blood Link</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .about-hero {
+            background-image: linear-gradient(to right, rgba(229,62,62,0.95) 0%, rgba(229,62,62,0.7) 100%), url('https://readdy.ai/api/search-image?query=Blood%20donation%20team%20helping%20patients%20in%20a%20Philippine%20hospital');
+            background-size: cover;
+            background-position: center;
+        }
+        .team-photo {
+            object-fit: cover;
+            height: 180px;
+            width: 180px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Navigation (simplified, copy yours for full nav) -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <a href="home.html" class="flex items-center">
+                    <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                        <i class="ri-heart-pulse-line text-white ri-lg"></i>
+                    </div>
+                    <span class="ml-2 text-xl font-['Pacifico'] text-gray-800">ADN Blood Link</span>
+                </a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="home.html" class="text-gray-700 hover:text-primary font-medium">Home</a>
+                    <a href="hospitals.html" class="text-gray-700 hover:text-primary font-medium">Hospitals</a>
+                    <a href="donate.html" class="text-gray-700 hover:text-primary font-medium">Donate</a>
+                    <a href="request.html" class="text-gray-700 hover:text-primary font-medium">Request Blood</a>
+                    <a href="about.html" class="text-primary font-medium">About Us</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="about-hero py-16 md:py-24 text-white text-center">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">About ADN Blood Link</h1>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8">Connecting lives, saving lives. Our mission is to link blood donors, hospitals, and patients across Agusan del Norte for a healthier, safer community.</p>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Our Story</h2>
+                <p class="text-gray-700 text-lg">
+                    Founded in 2025, ADN Blood Link began as a community-driven initiative in Agusan del Norte, Philippines, aiming to solve the challenge of timely, safe, and accessible blood donation. We work hand-in-hand with local hospitals, volunteers, and health officials to build a network that empowers donors, supports patients, and saves lives. 
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div>
+                    <div class="w-16 h-16 mx-auto bg-primary rounded-full flex items-center justify-center mb-4">
+                        <i class="ri-heart-add-line text-white ri-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Mission</h3>
+                    <p class="text-gray-600">To connect, inspire, and mobilize blood donors, ensuring every patient in need receives lifesaving blood quickly and safely.</p>
+                </div>
+                <div>
+                    <div class="w-16 h-16 mx-auto bg-blue-600 rounded-full flex items-center justify-center mb-4">
+                        <i class="ri-team-line text-white ri-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Vision</h3>
+                    <p class="text-gray-600">A province where no life is lost due to blood shortage and where communities unite to save each other.</p>
+                </div>
+                <div>
+                    <div class="w-16 h-16 mx-auto bg-yellow-400 rounded-full flex items-center justify-center mb-4">
+                        <i class="ri-hand-heart-line text-white ri-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Values</h3>
+                    <p class="text-gray-600">Compassion, Transparency, Community, Reliability, and Innovation guide every action we take.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meet the Team -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto text-center mb-12">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Meet the Team</h2>
+                <p class="text-gray-700 text-lg">Our team is made up of dedicated health professionals, volunteers, and tech innovators passionate about saving lives.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 justify-items-center">
+                <div class="flex flex-col items-center">
+                    <img src="https://readdy.ai/api/search-image?query=Filipino%20man%20in%20his%2040s%20in%20medical%20scrubs%20smiling" alt="Founder" class="rounded-full shadow team-photo mb-3">
+                    <h4 class="text-lg font-semibold text-gray-900">Dr. Juan Dela Cruz</h4>
+                    <span class="text-primary font-medium">Founder & Project Lead</span>
+                    <p class="text-gray-500 mt-2 text-center">A public health advocate with 20 years of hospital experience, Dr. Juan leads the vision and mission of ADN Blood Link.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://readdy.ai/api/search-image?query=Filipino%20woman%20in%20her%2030s%20wearing%20glasses%20and%20smiling" alt="Coordinator" class="rounded-full shadow team-photo mb-3">
+                    <h4 class="text-lg font-semibold text-gray-900">Maria Santos</h4>
+                    <span class="text-primary font-medium">Network Coordinator</span>
+                    <p class="text-gray-500 mt-2 text-center">Maria bridges the gap between hospitals, donors, and patients to ensure smooth operations and communication.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://readdy.ai/api/search-image?query=Young%20Filipino%20man%20IT%20developer%20casual%20attire" alt="Developer" class="rounded-full shadow team-photo mb-3">
+                    <h4 class="text-lg font-semibold text-gray-900">Mark Rivera</h4>
+                    <span class="text-primary font-medium">Lead Developer</span>
+                    <p class="text-gray-500 mt-2 text-center">Mark develops and maintains the ADN Blood Link platform, ensuring it’s user-friendly, secure, and reliable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners & Recognition -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto text-center mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Our Partners</h2>
+                <p class="text-gray-700 text-lg">We proudly work with hospitals, government agencies, and NGOs dedicated to healthcare and emergency response in Agusan del Norte.</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-8">
+                <div class="flex flex-col items-center">
+                    <i class="ri-government-line text-gray-700 text-5xl mb-2"></i>
+                    <span class="text-gray-700 font-medium">Department of Health</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="ri-hospital-line text-gray-700 text-5xl mb-2"></i>
+                    <span class="text-gray-700 font-medium">Butuan Medical Center</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="ri-team-line text-gray-700 text-5xl mb-2"></i>
+                    <span class="text-gray-700 font-medium">Local Volunteers</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Info -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Get Involved or Contact Us</h2>
+            <p class="mb-6">Want to join, partner, or support our mission? Reach out to us!</p>
+            <div class="flex flex-col md:flex-row justify-center gap-8 text-lg">
+                <div><i class="ri-mail-line mr-2"></i> info@adnbloodlink.gov.ph</div>
+                <div><i class="ri-phone-line mr-2"></i> +63 (85) 123-4567</div>
+                <div><i class="ri-map-pin-line mr-2"></i> Butuan City, Philippines</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (reuse your site's footer) -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center border-t border-gray-800 pt-6">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 ADN Blood Link. All rights reserved.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

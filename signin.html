@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | ADN Blood Link</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#e53e3e',secondary:'#4299e1'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .hero-section {
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.8) 40%, rgba(255, 255, 255, 0) 100%), url('https://readdy.ai/api/search-image?query=A%20modern%20hospital%20environment%20with%20medical%20professionals%20and%20blood%20donation%20equipment.%20The%20image%20shows%20a%20bright%2C%20clean%20medical%20facility%20with%20subtle%20medical%20symbols.%20The%20left%20side%20has%20a%20clean%20white%20gradient%20that%20smoothly%20transitions%20to%20the%20right%20side%20showing%20the%20hospital%20scene.%20Professional%20lighting%2C%20modern%20medical%20equipment%2C%20and%20a%20sense%20of%20care%20and%20compassion.&width=1280&height=600&seq=hero123&orientation=landscape');
+            background-size: cover;
+            background-position: center;
+        }
+        .custom-checkbox {
+            display: flex;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+        }
+        .custom-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .checkmark {
+            height: 20px;
+            width: 20px;
+            background-color: #fff;
+            border: 2px solid #cbd5e0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .custom-checkbox input:checked ~ .checkmark {
+            background-color: #e53e3e;
+            border-color: #e53e3e;
+        }
+        .checkmark:after {
+            content: "";
+            display: none;
+        }
+        .custom-checkbox input:checked ~ .checkmark:after {
+            display: block;
+            width: 6px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        .custom-switch {
+            position: relative;
+            display: inline-block;
+            width: 46px;
+            height: 24px;
+        }
+        .custom-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #e53e3e;
+        }
+        input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+        .blood-type-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .blood-type-option {
+            position: relative;
+        }
+        .blood-type-option input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .blood-type-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .blood-type-option input:checked + .blood-type-label {
+            background-color: #e53e3e;
+            color: white;
+            border-color: #e53e3e;
+        }
+        .tab-button {
+            position: relative;
+        }
+        .tab-button::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #e53e3e;
+            transition: width 0.3s;
+        }
+        .tab-button.active::after {
+            width: 100%;
+        }
+        .hospital-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        #termsModal .scrollable-content {
+            max-height: 24rem; /* Adjust height as needed */
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center">
+                        <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                            <i class="ri-heart-pulse-line text-white ri-lg"></i>
+                        </div>
+                        <span class="ml-2 text-xl font-['Pacifico'] text-gray-800">ADN Blood Link</span>
+                    </a>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary font-medium">Home</a>
+                    <a href="hospitals.html" class="text-gray-700 hover:text-primary font-medium">Hospitals</a>
+                    <a href="donate.html" class="text-gray-700 hover:text-primary font-medium">Donate</a>
+                    <a href="request.html" class="text-gray-700 hover:text-primary font-medium">Request Blood</a>
+                </nav>
+                
+                <div class="hidden md:flex items-center space-x-4">
+                    <button id="signInBtn" class="px-4 py-2 text-primary border border-primary hover:bg-primary hover:text-white transition-colors duration-300 !rounded-button whitespace-nowrap"><a href="signin.html">Sign In</a></button>
+                    <button id="signUpBtn" class="px-4 py-2 bg-primary text-white hover:bg-red-700 transition-colors duration-300 !rounded-button whitespace-nowrap"><a href="signup.html">Sign Up</a></button>
+                </div>
+                
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="w-10 h-10 flex items-center justify-center">
+                        <i class="ri-menu-line text-gray-700 ri-lg"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden pb-4">
+                <nav class="flex flex-col space-y-3">
+                    <a href="home.html" class="text-gray-700 hover:text-primary font-medium py-2">Home</a>
+                    <a href="#hospitals" class="text-gray-700 hover:text-primary font-medium py-2">Hospitals</a>
+                    <a href="#" class="text-gray-700 hover:text-primary font-medium py-2">Donate</a>
+                    <a href="#" class="text-gray-700 hover:text-primary font-medium py-2">Request Blood</a>
+                    <div class="flex space-x-3 pt-2">
+                        <button id="mobileSignInBtn" class="px-4 py-2 text-primary border border-primary hover:bg-primary hover:text-white transition-colors duration-300 !rounded-button whitespace-nowrap">Sign In</button>
+                        <button id="mobileSignUpBtn" class="px-4 py-2 bg-primary text-white hover:bg-red-700 transition-colors duration-300 !rounded-button whitespace-nowrap">Sign Up</button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main class="min-h-screen flex items-center justify-center bg-gray-50">
+        <!-- Sign In Modal Content as Full Page -->
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 overflow-hidden">
+            <!-- Modal Header -->
+            <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-semibold text-gray-900">Sign In</h3>
+                    <button id="closeSignInModal" class="text-gray-400 hover:text-gray-500">
+                        <i class="ri-close-line ri-lg"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="px-6 py-4">
+                <form>
+                    <!-- Donor and Requester fields remain unchanged -->
+                    <div class="mb-4" id="hospital-fields" style="display: none;">
+                        <label class="block text-sm font-medium text-gray-700 mb-1" for="hospitalName">Enter Hospital Name</label>
+                        <input type="text" id="hospitalName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="Enter hospital name">
+                    </div>
+                    
+                    <div class="mb-4" id="email-fields">
+                        <label class="block text-sm font-medium text-gray-700 mb-1" for="email">Email Address</label>
+                        <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-1" for="password">Password</label>
+                        <div class="relative">
+                            <input type="password" id="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="Enter your password">
+                            <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-500">
+                                <i class="ri-eye-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between mb-6">
+                        <label class="custom-checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                            <span class="ml-2 text-sm text-gray-700">Remember me</span>
+                        </label>
+                        <a href="#" class="text-sm text-primary hover:underline">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit" class="w-full py-3 bg-primary text-white hover:bg-red-700 transition-colors duration-300 font-medium !rounded-button whitespace-nowrap">Sign In</button>
+                    
+                    <div class="mt-4 text-center">
+                        <p class="text-sm text-gray-600">
+                            Don't have an account? 
+                            <a href="#" class="text-primary hover:underline" id="goToSignUp">Sign Up</a>
+                        </p>
+                    </div>
+                </form>            
+            </div>
+        </div>
+    </main>
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Column 1 -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                            <i class="ri-heart-pulse-line text-white ri-lg"></i>
+                        </div>
+                        <span class="ml-2 text-xl font-['Pacifico'] text-white">ADN Blood Link</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Connecting donors, patients, and hospitals across Agusan del Norte for efficient blood donation and distribution.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors duration-300">
+                            <i class="ri-facebook-fill text-white"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors duration-300">
+                            <i class="ri-twitter-fill text-white"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors duration-300">
+                            <i class="ri-instagram-fill text-white"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Hospitals</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Donate Blood</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Request Blood</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Information</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="ri-map-pin-line mr-2 mt-1 text-primary"></i>
+                            <span class="text-gray-400">Department of Health - Agusan del Norte, Butuan City, Philippines</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-phone-line mr-2 text-primary"></i>
+                            <span class="text-gray-400">+63 (85) 123-4567</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-mail-line mr-2 text-primary"></i>
+                            <span class="text-gray-400">info@adnbloodlink.gov.ph</span>
+                        </li>
+                    </ul>
+                    <div class="mt-4">
+                        <h4 class="text-white font-medium mb-2">Emergency Hotline</h4>
+                        <p class="text-primary font-bold text-xl">+63 (85) 911-1234</p>
+                    </div>
+                </div>
+                
+                <!-- Column 4 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Subscribe to receive updates on blood donation drives and critical needs.</p>
+                    <form>
+                        <div class="flex mb-2">
+                            <input type="email" placeholder="Your email address" class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-l-lg focus:outline-none focus:ring-1 focus:ring-primary text-white">
+                            <button type="submit" class="bg-primary px-4 py-2 rounded-r-lg hover:bg-red-700 transition-colors duration-300">
+                                <i class="ri-send-plane-fill text-white"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="mt-4">
+                        <h4 class="text-white font-medium mb-2">Supported By</h4>
+                        <div class="flex space-x-4">
+                            <i class="ri-government-line text-gray-400 ri-lg"></i>
+                            <i class="ri-hospital-line text-gray-400 ri-lg"></i>
+                            <i class="ri-heart-pulse-line text-gray-400 ri-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 ADN Blood Link. All rights reserved.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Terms of Service</a>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+     <script>
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const signInBtn = document.getElementById('signInBtn');
+            const signUpBtn = document.getElementById('signUpBtn');
+            const mobileSignInBtn = document.getElementById('mobileSignInBtn');
+            const mobileSignUpBtn = document.getElementById('mobileSignUpBtn');
+            const viewAllBtn = document.getElementById('viewAllBtn');
+            const signInModal = document.getElementById('signInModal');
+            const closeSignInModal = document.getElementById('closeSignInModal');
+            
+            // Toggle mobile menu
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                    mobileMenu.classList.toggle('mobile-menu-open');
+                });
+            }
+            
+            // Show sign in modal
+            const showSignInModal = () => {
+                signInModal.classList.remove('hidden');
+            };
+            
+            // Close sign in modal
+            if (closeSignInModal) {
+                closeSignInModal.addEventListener('click', function() {
+                    signInModal.classList.add('hidden');
+                });
+            }
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === signInModal) {
+                    signInModal.classList.add('hidden');
+                }
+            });
+            
+            // Event listeners for sign in buttons
+            if (signInBtn) signInBtn.addEventListener('click', showSignInModal);
+            if (mobileSignInBtn) mobileSignInBtn.addEventListener('click', showSignInModal);
+            
+            // Event listeners for sign up buttons
+            if (signUpBtn) signUpBtn.addEventListener('click', showSignInModal);
+            if (mobileSignUpBtn) mobileSignUpBtn.addEventListener('click', showSignInModal);
+            
+            // View all hospitals button
+            if (viewAllBtn) {
+                viewAllBtn.addEventListener('click', function() {
+                    alert('Viewing all hospitals...');
+                    // In a real application, this would load more hospital cards
+                });
+            }
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
